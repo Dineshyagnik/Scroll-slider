@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll slide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="main" class="main">
+        <div class="first" id="first">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit cum ab voluptatibus ipsum tempore
+                architecto nulla et rem natus, dignissimos quia inventore. Cum corporis officiis excepturi autem,
+                aliquam inventore, architecto illo asperiores molestias nam impedit consequuntur eveniet expedita
+                numquam. Laudantium earum blanditiis culpa nesciunt dolores, autem cupiditate! Quas blanditiis incidunt
+                unde ratione dolores! Debitis amet voluptatum aperiam aliquid perferendis dolore, nam maxime inventore
+                itaque et illo laboriosam consectetur mollitia sunt! Debitis unde mollitia aperiam. Laboriosam similique
+                libero sapiente ad, eos quod.</p>
+            <img src="https://images.unsplash.com/photo-1683009427540-c5bd6a32abf6?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+        <div class="first" id="second">
+            <p>opposed to using 'Content here, content here', making it look like readable English. Many desktop
+                publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search
+                for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over
+                the years, sometimes by accident, sometimes</p>
+            <img src="https://images.unsplash.com/photo-1682687220866-c856f566f1bd?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+
+    </div>
+
+
+
+    <script>
+        var mainDiv = document.getElementById('main');
+        var firstDiv = document.getElementById('second');
+        var totalScrolledPercentage = 0;
+
+        function handleScroll(event) {
+            // Get the amount of pixels scrolled
+            var scrolledPixels = event.deltaY;
+
+            // Get the total scrollable height
+            var totalScrollableHeight = mainDiv.scrollHeight - mainDiv.clientHeight;
+
+            // Calculate the percentage scrolled
+            var scrollPercentage = (totalScrolledPercentage + (scrolledPixels / totalScrollableHeight) * 100);
+
+            // Ensure the scrollPercentage is within the range [0, 100]
+            scrollPercentage = Math.min(100, Math.max(0, scrollPercentage));
+
+            // If scrolling up and at the top, reset totalScrolledPercentage
+            if (scrolledPixels < 0 && mainDiv.scrollTop === 0) {
+                totalScrolledPercentage = 0;
+            }
+
+            // Update the height of the .first div
+            firstDiv.style.height = scrollPercentage + '%';
+
+            // Update the total scrolled percentage
+            totalScrolledPercentage = scrollPercentage;
+        }
+
+        // Attach the handleScroll function to the 'wheel' event of the specified div
+        mainDiv.addEventListener('wheel', handleScroll);
+    </script>
+
+
+
+</body>
+
+</html>
